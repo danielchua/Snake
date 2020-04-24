@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "SnakeEngine.h"
 #include <cstring>
 #include <cstdlib>
@@ -16,10 +16,10 @@ SnakeEngine::SnakeEngine(TileRepresentations boardRepresentation, uint8_t boardW
 	m_gameOver(false),
 	m_point()
 {
-	for (uint8_t i = 0; i < m_width; ++i)
+	for (uint8_t i = 0; i < m_width; i++)
 	{
 		m_ppBoard[i] = new uint8_t[m_height];
-		for (uint8_t j = 0; j < m_height; ++j)
+		for (uint8_t j = 0; j < m_height; j++)
 		{
 			m_ppBoard[i][j] = m_boardVisuals.Empty;
 		}
@@ -40,6 +40,7 @@ void SnakeEngine::SetupBoard()
 	m_player.BodyPositions.insert(m_player.BodyPositions.begin(), m_startPos);
 	spawnPoint();
 	setHead(m_player.BodyPositions.back());
+	m_gameOver = false;
 }
 
 void SnakeEngine::RenderFrame(PlayerAction action)
@@ -74,11 +75,11 @@ bool SnakeEngine::IsGameOver()
 
 void SnakeEngine::clearBoard()
 {
-	for (uint8_t i = 0; i < m_height; ++i)
+	for (uint8_t i = 0; i < m_height; i++)
 	{
 		for (uint8_t j = 0; j < m_width; j++)
 		{
-			m_ppBoard[i][j] = m_boardVisuals.Empty;
+			m_ppBoard[j][i] = m_boardVisuals.Empty;
 		}
 	}
 }
